@@ -1,0 +1,126 @@
+    Mastering Data Structures   
+    -------------------------
+Source: https://www.udemy.com/course/datastructurescncpp/
+
+*   Date: 09.02.2020
+*   Basics of data structures
+*   -------------------------
+
+-> Arrays 
+    Stores similar type of data
+    Syntax -> int A[10];
+    Use loop to manipulate data
+    Stored in stack frame of main()
+
+-> Structures
+    * Related data members under the same name
+    The data members can be of dissimilar type
+        
+        <keyword>   <Name of strcuture>
+        struct      Rectangle
+        {
+            * Data members            
+            int length; int breadth;
+        };
+
+    * Creating a "variable" of type struct
+        *   Declaration
+            struct Rectangle rectangle;
+        *   Initialization
+            struct Rectangle rectangle = {5,5};
+
+    * Size of a strcuture?
+        It's the total memory consumed by all of it's members.
+        *   Here "rectangle" takes up 4 bytes.
+            int length - 2 bytes
+            int breadth - 2 bytes
+    
+    * Memory space - Stack frame of main()
+
+    * Accessing members of a structure
+        The dot(.) operator is used to modify the value of a member.
+        Syntax -> rectangle.length = 10;
+
+    * Accessing with a pointer
+        struct Rectangle *Pointer2Rectangle = &rectangle;
+        ! Pointer2Rectangle.length      --> Incorrect
+        ! *Pointer2Rectangle.length     --> Incorrect
+        * (*Pointer2Rectangle).length   --> Correct
+            This is because the dot(.) operator has higher precedence than the star(*) operator.
+        * Pointer2Rectangle -> length   --> Correct
+            The arrow(->) operator.
+        
+
+-> Pointers (*)
+    ! Address variable - indirect accessing
+    * Does not store the data of a variable
+
+    * Memory sections
+        1. Code
+        2. Stack
+        3. Heap
+        
+        Program can access code and stack memory. Only a pointer can access heap memory.
+            Accessing files on the hard drive which are external to a program -> using a pointer of type file.
+            In general for accessing resources.
+        
+        Pointers for passing parameters -> pass by reference
+    
+    * Declaring and initializing
+        int a = 10; 
+        int *pointer; <- declaration
+        *pointer = &a <- initialization
+    
+    * Dereferencing
+        printf("%d", a);    <- This line will print the value of "a", which is 10.
+        printf("%d", p);    <- This line will print the address where variable "a" is stored (stack memory)
+        *printf("%d", *p);   <- This line will print the value of "a", which is 10. This is called dereferencing.
+    
+    * Accessing heap memory
+        Every variable will be in stack memory.
+        !malloc <stdlib.h>
+            Used for accessing heap memory.
+            Syntax -> malloc(<required quantity> * <size of data type required>)
+                * malloc(5 * sizeof(int)) - allocates memory in heap for storing 5 integers in heap memory
+            Returns -> pointer of type void
+        * int *p = (int*) malloc(5 * sizeof(int));
+        * Pointer2Rectangle = (struct Rectangle) malloc(sizeof(struct Rectangle));
+        
+        ? CPP
+            * int *p = new int[5];
+
+-> Reference (&)
+    ! CPP exclusive
+    * Used for providing an alternate alias for an existing variable
+    All the aliases share the same address location.
+    Modifying one will modify the value associated with all of them.
+
+    Syntax -> int &ref = <variable>;
+        * A reference variable must be initialized
+
+-> Functions
+    Code to perform a specific task.
+    * Functions:instructions :: Structure:data
+        Functions are a group of instructions that perform a particular task.
+    * aka Modules | Procedures
+
+    * Three sections
+        1. Prototype
+            <return type> <function name>(parameters...);
+            * Formal parameters
+                int sum(int a, int b);
+            aka header
+        2. Defenition
+            Instructions to be performed by the function
+                {
+                    Must be within curly braces
+                    int result = a + b;
+                    return result;
+                }
+            aka body, elaboration
+        3. Function call
+            <variable> = <function name>(parameters...);
+                int c = sum(a, b);
+            Here a and b are the parameters. 
+            * Actual parameters.
+
