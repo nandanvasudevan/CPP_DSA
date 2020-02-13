@@ -226,6 +226,11 @@ Source: https://www.udemy.com/course/datastructurescncpp/
 
 *   Abstract Data Types
 *   -------------------
-    A data type consists of it's representation and the operations that can be performed on it.
+        A data type consists of it's representation and the operations that can be performed on it.
         Primarily used in object oriented programming where a class is constructed to contain a physical data type along with all the required
     operation needed for the data type. The actual data type or details about it are abstracted.
+
+*   #Date: 12.02.2020
+*   Time and Space Complexity
+*   -------------------------
+        Time complexity depends on the "procedure" or algorithm used for doing a particular task.
