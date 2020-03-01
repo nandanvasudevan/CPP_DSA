@@ -1,8 +1,10 @@
 #include "SimpleRecursion.h"
 
+int x = 0;
+
 int recursiveFunction(int n)
 {
-    static int x = 0;
+    // static int x = 0;
     static int val = 0;
     if(n > 0)
     {
