@@ -4,6 +4,6 @@
 int main()
 {
     int num = 5;
-    printf("%d", recursiveFunction(num));
+    printf("\nFinal: %d", recursiveFunction(num));
     return 0;
 }
