@@ -48,8 +48,7 @@ Source: https://www.udemy.com/course/datastructurescncpp/
         * (*Pointer2Rectangle).length   --> Correct
             This is because the dot(.) operator has higher precedence than the star(*) operator.
         * Pointer2Rectangle -> length   --> Correct
-            The arrow(->) operator.
-        
+            The arrow(->) operator.    
 
 -> Pointers (*)
     ! Address variable - indirect accessing
@@ -224,8 +223,7 @@ Source: https://www.udemy.com/course/datastructurescncpp/
                 * Tabular
                     Hash tables
 
-*   Abstract Data Types
-*   -------------------
+-> Abstract Data Types
         A data type consists of it's representation and the operations that can be performed on it.
         Primarily used in object oriented programming where a class is constructed to contain a physical data type along with all the required
     operation needed for the data type. The actual data type or details about it are abstracted.
@@ -234,3 +232,59 @@ Source: https://www.udemy.com/course/datastructurescncpp/
 *   Time and Space Complexity
 *   -------------------------
         Time complexity depends on the "procedure" or algorithm used for doing a particular task.
+
+*   #Date: 01 March 2020
+*   Recursion
+*   -------------------------
+        The process in which a function calls itself is known as recursion and the corresponding function is called the recursive function
+-> Head Recursion
+    void RecursiveFunction(int n)
+        {
+            if(n > 0)
+            {
+                RecursiveFunction(n-1);
+                /* task 1 */           
+            }
+        }
+    * In head recursion, the recursive function is called before execurting any tasks.
+
+-> Tail Recursion
+    void RecursiveFunction(int n)
+        {
+            if(n > 0)
+            {                
+                /* task 1 */           
+                RecursiveFunction(n-1);
+            }
+        }
+    * In head recursion, the recursive function is called after execurting any tasks.
+    
+-> Time and space complexity
+
+        void RecursiveFunction(int n)
+        {
+            if(n > 0)
+            {
+                /* task 1 */               
+                
+                RecursiveFunction(n-1);
+            }
+        }
+    In the above example, let RecursiveFunction() have a time complexity of T(n).
+    Task 1 - 3 have a time complexity of 1 each, so 3.
+        * The function call to RecursiveFunction(n-1) is not just another task, it's a call to a function that has a time complexity of T(n).
+    Therefore this function must have a time complexity of T(n-1).
+    Total time complexity,
+        *    T(n) = T(n-1) + 1 -> n > 0
+        *   T(n) = 1          -> n = 0
+    for first recursive call,
+        T(n) = T(n-1) + 1
+    for second recursive call,
+        T(n) = T(n-2) + 2
+    for kth recursive call
+        T(n) = T(n-k) + k
+    when k = n,
+        T(n) = T(n-n) + n
+        T(n) = T(0) + n
+        T(n) = 1 + n
+    *   T(n) = O(n)

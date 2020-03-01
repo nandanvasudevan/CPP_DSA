@@ -1,0 +1,43 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Compile",
+            "type": "shell",
+            "command": "cl",
+            "args": [
+                "main.c",
+                "SimpleRecursion.obj"
+            ],            
+            "dependsOn": "Dependency",
+            "options": {
+                "cwd": "${workspaceRoot}/Recursion"
+            }
+        },
+        {
+            "label": "Dependency",
+            "type": "shell",
+            "command": "cl",
+            "args": [
+                "/c", "*.c"
+            ],
+            "group": "build",
+            "options": {
+                "cwd": "${fileDirname}"
+            }
+        },
+        {
+            "type": "shell",
+            "label": "EXE",
+            "command": "main.exe",            
+            "dependsOn": "Compile",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "options": {
+                "cwd": "${fileDirname}"
+            }            
+        }
+    ]
+}
