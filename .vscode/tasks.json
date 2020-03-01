@@ -7,11 +7,11 @@
             "command": "cl",
             "args": [
                 "main.c",
-                "SimpleRecursion.obj"
-            ],            
+                "*.obj"
+            ],
             "dependsOn": "Dependency",
             "options": {
-                "cwd": "${workspaceRoot}/Recursion"
+                "cwd": "${fileDirname}"
             }
         },
         {
@@ -19,7 +19,8 @@
             "type": "shell",
             "command": "cl",
             "args": [
-                "/c", "*.c"
+                "/c",
+                "*.c"
             ],
             "group": "build",
             "options": {
@@ -28,16 +29,37 @@
         },
         {
             "type": "shell",
-            "label": "EXE",
-            "command": "main.exe",            
+            "label": "ExecuteDIR",
+            "command": "main.exe",
             "dependsOn": "Compile",
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
+            "group": "build",
             "options": {
                 "cwd": "${fileDirname}"
             }            
+        },
+        {
+            "label": "CompileThis",
+            "type": "shell",
+            "command": "cl",
+            "args": [
+                "${fileBasename}"
+            ],
+            "group": "build",
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": ["$gcc"]
+        },
+        {
+            "type": "shell",
+            "label": "ExecuteThis",
+            "command": "${fileBasenameNoExtension}.exe",
+            "dependsOn": "CompileThis",
+            "group": "build",
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": ["$gcc"]         
         }
     ]
 }
