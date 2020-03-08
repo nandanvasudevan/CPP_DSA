@@ -6,7 +6,8 @@
             "type": "shell",
             "command": "cl",
             "args": [
-                "main.c",
+                "/EHsc",
+                "${fileBasenameNoExtension}.cpp",
                 "*.obj"
             ],
             "dependsOn": "Dependency",
@@ -20,7 +21,8 @@
             "command": "cl",
             "args": [
                 "/c",
-                "*.c"
+                "/EHsc",
+                "*.cpp"
             ],
             "group": "build",
             "options": {
@@ -30,12 +32,15 @@
         {
             "type": "shell",
             "label": "ExecuteDIR",
-            "command": "main.exe",
+            "command": "${fileBasenameNoExtension}.exe",
             "dependsOn": "Compile",
             "group": "build",
             "options": {
                 "cwd": "${fileDirname}"
-            }            
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
         },
         {
             "label": "CompileThis",
@@ -48,7 +53,9 @@
             "options": {
                 "cwd": "${fileDirname}"
             },
-            "problemMatcher": ["$gcc"]
+            "problemMatcher": [
+                "$gcc"
+            ]
         },
         {
             "type": "shell",
@@ -59,7 +66,9 @@
             "options": {
                 "cwd": "${fileDirname}"
             },
-            "problemMatcher": ["$gcc"]         
+            "problemMatcher": [
+                "$gcc"
+            ]
         }
     ]
 }
