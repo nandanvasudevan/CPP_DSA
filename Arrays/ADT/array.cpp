@@ -21,6 +21,8 @@ Array::Array(int length, bool bFIFO_LIFO, bool bOverwrite)
     A = new int[size];
 }
 
+int Array::getValue(const int pos) { return A[pos]; }
+
 void Array::display(char separator, std::string& Message)
 {
     std::cout << Message << std::endl;
@@ -28,6 +30,15 @@ void Array::display(char separator, std::string& Message)
     {
         std::cout << A[i] << separator;
     }
+}
+
+void Array::remove(const int pos)
+{
+    for(int i = pos; i < length; i++)
+    {
+        A[i] = A[i+1];
+    }
+    updateStats();
 }
 
 void Array::insert(const int pos, const int value)
@@ -86,7 +97,130 @@ int Array::insert(const int value)
     return returnVal;   
 }
 
-int Array::getSize(){ return size; }
+void Array::reverse()
+{
+    // int* reverse = new int[length];
+    for(int i = 0, j = length - 1; i < j; i++, j--)
+    {
+        // reverse[--j] = A[i];
+        int temp = A[i];
+        A[i] = A[j];
+        A[j] = temp;
+    }
+    // delete reverse;
+}
+
+Array Array::merge(int array1[], int array2[], int len1, int len2)
+{
+    int finalLenth = len1 + len2;
+    Array* mergedArray = new Array(finalLenth);
+    int bigLength, smallLength;
+
+    if(len1 >= len2) 
+    {
+        bigLength = len1;
+        smallLength = len2;
+    }
+    else
+    {
+        bigLength = len2;
+        smallLength = len1;
+    }
+    
+    Array* bigOne = new Array(bigLength);
+    Array* smallOne = new Array(smallLength);
+
+    bigOne->A = array1;
+    smallOne->A = array2;
+
+    if(!(bigOne->isSorted() && smallOne->isSorted())) return false;
+
+    for(int i=0, j=0, k=0; k < finalLenth;k++)
+    {
+        if((bigOne->A[i] <=smallOne->A[j]) && (i < bigLength))
+        {   
+            std::cout << "bigOne[" << i <<"]: " << bigOne->A[i];
+            mergedArray->A[k] = bigOne->A[i++];
+        }
+        else if((bigOne->A[i] > smallOne->A[j]) && (j < smallLength))
+        {
+            std::cout << "smallOne[" << j <<"]: " << smallOne->A[j];
+            mergedArray->A[k] = smallOne->A[j++];
+        }
+        else
+        {
+            if(i < bigLength)
+                mergedArray->A[k] = bigOne->A[i++];
+            else
+            {                
+                mergedArray->A[k] = smallOne->A[j++];
+            }
+                
+        }
+    }
+    return *mergedArray;
+}
+
+Array Array::merge(Array array1, Array array2, bool ignoreDuplicate)
+{
+    int finalLenth = array1.getLength() + array2.getLength();
+    Array* mergedArray = new Array(finalLenth);
+    int bigLength, smallLength;
+
+    if(array1.getLength() >= array2.getLength()) 
+    {
+        bigLength = array1.getLength();
+        smallLength = array2.getLength();
+    }
+    else
+    {
+        bigLength = array2.getLength();
+        smallLength = array1.getLength();
+    }
+    
+    Array* bigOne = new Array(bigLength);
+    Array* smallOne = new Array(smallLength);
+
+    bigOne->A = array1.A;
+    smallOne->A = array2.A;
+
+    if(!(bigOne->isSorted() && smallOne->isSorted())) return false;
+
+    for(int i=0, j=0, k=0; k < finalLenth;k++)
+    {
+        if((bigOne->A[i] == smallOne->A[j]) && (j < smallLength) && (i < bigLength) && ignoreDuplicate)
+        {
+            mergedArray->A[k] = smallOne->A[j++];
+            i++;
+        }
+        else if((bigOne->A[i] <= smallOne->A[j]) && (i < bigLength))
+        {   
+            mergedArray->A[k] = bigOne->A[i++];
+        }
+        else if((bigOne->A[i] > smallOne->A[j]) && (j < smallLength))
+        {
+            mergedArray->A[k] = smallOne->A[j++];
+        }        
+        else
+        {
+            if(i < bigLength)
+                mergedArray->A[k] = bigOne->A[i++];
+            else if(j < smallLength)
+            {
+                mergedArray->A[k] = smallOne->A[j++];
+            }
+            else
+            {
+                mergedArray->A[k] = 0;
+            }
+            
+                
+        }
+    }
+    return *mergedArray;
+}
+
+Array Array::unionOperator(Array array1, Array array2){ return merge(array1, array2, true); }
 
 void Array::updateStats()
 {
@@ -107,5 +241,22 @@ void Array::updateStats()
 }
 
 float Array::getAverage() { return stats.average; }
+int Array::getSize(){ return size; }
+int Array::getLength() { return length; }
 int Array::getMax() { return stats.max; }
 int Array::getMin() { return stats.min; }
+
+bool Array::isSorted()
+{
+    int diff = 0;
+    bool negativeSlope = false, positiveSlope = false;
+
+    for(int i = 1; i < length; i++)
+    {
+        diff = A[i] - A[i-1];
+        if((diff >= 0) && !negativeSlope) positiveSlope = true;
+        else if((diff < 0) && !positiveSlope) negativeSlope = true;
+        else return false;
+    }
+    return true;
+}
