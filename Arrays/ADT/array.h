@@ -59,5 +59,6 @@ class Array
         int getLength();        
         int getMax();
         int getMin();
+        int getSum();
 };
 #endif

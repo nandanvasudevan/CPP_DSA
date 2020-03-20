@@ -245,6 +245,7 @@ int Array::getSize(){ return size; }
 int Array::getLength() { return length; }
 int Array::getMax() { return stats.max; }
 int Array::getMin() { return stats.min; }
+int Array::getSum() { return stats.sum; }
 
 bool Array::isSorted()
 {

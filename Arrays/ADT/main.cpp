@@ -1,7 +1,7 @@
 #include <iostream>
 #include "array.h"
 
-int main()
+/* int main()
 {
     int length = 5;
     Array list1 = Array(length, true, true);
@@ -33,4 +33,4 @@ int main()
     // std::cout << std::boolalpha << "\nisSorted: " << list2.isSorted();    
     Array mergedArray = list1.merge(list2, list1); 
     mergedArray.display('\t', std::string("\nMerged:"));
-}
+} */
