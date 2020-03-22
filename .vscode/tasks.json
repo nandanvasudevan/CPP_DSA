@@ -19,8 +19,7 @@
             "label": "Dependency",
             "type": "shell",
             "command": "cl",
-            "args": [
-                "/c",
+            "args": [                
                 "/EHsc",
                 "*.cpp"
             ],
