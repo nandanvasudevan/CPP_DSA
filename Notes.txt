@@ -16,7 +16,7 @@ Source: https://www.udemy.com/course/datastructurescncpp/
     * Related data members under the same name
     The data members can be of dissimilar type
         
-        <keyword>   <Name of strcuture>
+        <keyword>   <Name of structure>
         struct      Rectangle
         {
             * Data members            
@@ -29,7 +29,7 @@ Source: https://www.udemy.com/course/datastructurescncpp/
         *   Initialization
             struct Rectangle rectangle = {5,5};
 
-    * Size of a strcuture?
+    * Size of a structure?
         It's the total memory consumed by all of it's members.
         *   Here "rectangle" takes up 4 bytes.
             int length - 2 bytes
@@ -109,7 +109,7 @@ Source: https://www.udemy.com/course/datastructurescncpp/
             * Formal parameters
                 int sum(int a, int b);
             aka header
-        2. Defenition
+        2. Definition
             Instructions to be performed by the function
                 {
                     /*Must be within curly braces*/
@@ -163,7 +163,7 @@ Source: https://www.udemy.com/course/datastructurescncpp/
     * Passing a structure
         int sum(struct Rectangle r);
         The above line receives a parameter of type Rectangle.
-        * sum(rectangle); // where rectangle is a variable of strucure Rectangle
+        * sum(rectangle); // where rectangle is a variable of structure Rectangle
 
 *   #Date: 12.02.2020
 *   Introduction to data structures
@@ -172,7 +172,7 @@ Source: https://www.udemy.com/course/datastructurescncpp/
         The data structures are stored inside the main memory during the execution of a program.
     
     * Database
-        Data structures differ from a database due to the fact that a database is stored in thwe secondary memory of a system like the HDD.
+        Data structures differ from a database due to the fact that a database is stored in the secondary memory of a system like the HDD.
     Whereas a data structure is always stored in the primary memory or RAM.
     
     *   Static vs Dynamic Memory Allocation
@@ -246,7 +246,7 @@ Source: https://www.udemy.com/course/datastructurescncpp/
                 /* task 1 */           
             }
         }
-    * In head recursion, the recursive function is called before execurting any tasks.
+    * In head recursion, the recursive function is called before executing any tasks.
 
 -> Tail Recursion
     void RecursiveFunction(int n)
@@ -257,7 +257,7 @@ Source: https://www.udemy.com/course/datastructurescncpp/
                 RecursiveFunction(n-1);
             }
         }
-    * In head recursion, the recursive function is called after execurting any tasks.
+    * In head recursion, the recursive function is called after executing any tasks.
 
 -> Time and space complexity
 
@@ -303,7 +303,7 @@ Source: https://www.udemy.com/course/datastructurescncpp/
     *   Space complexity = O(n)
         Space complexity is O(n) because for each function call, a separate activation record is created in stack.
     
-    On the otherhand, for a loop,
+    On the other hand, for a loop,
         void Loop(int n)
         {
             while(n > 0)
@@ -330,7 +330,7 @@ Source: https://www.udemy.com/course/datastructurescncpp/
         Space complexity is O(n) because for each function call, a separate activation record is created in stack.
         Some compilers at higher optimization levels, convert tail recursion to a simple loop to save space.
     
-    On the otherhand, for a loop,
+    On the other hand, for a loop,
         void Loop(int n)
         {
             int i = 0;
@@ -416,13 +416,13 @@ Source: https://www.udemy.com/course/datastructurescncpp/
 -> Dynamic initialization of arrays
     *   In CPP and C it is possible to create arrays at run time.
     !   You cannot increase the size of an array at run time.
-    The alternative is to create a new dynamic array of larger size of then copy exisitng elements from the old array.
+    The alternative is to create a new dynamic array of larger size of then copy existing elements from the old array.
 
         void dynamicArray()
         {
             ? CPP language
             int *P = new int [5]; // Creates an int array of size 5
-            delete(P); // deallocates heap memory
+            delete(P); // de-allocates heap memory
 
             ? C language
             int *p = (int*)malloc(5 * sizeof(int));
