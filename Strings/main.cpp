@@ -3,6 +3,7 @@
 
 int main()
 {
+    std::cout << std::endl << "Enter string:\t";
     String name = String(10);
     name.input();
     //name.reverse();

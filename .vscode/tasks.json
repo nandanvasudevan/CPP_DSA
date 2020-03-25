@@ -4,13 +4,12 @@
         {
             "label": "Compile",
             "type": "shell",
-            "command": "cl",
+            "command": "g++",
             "args": [
-                "/EHsc",
-                "${fileBasenameNoExtension}.cpp",
-                "*.obj"
+                "*.cpp",
+                "-o",
+                "${fileBasenameNoExtension}.exe"
             ],
-            "dependsOn": "Dependency",
             "options": {
                 "cwd": "${fileDirname}"
             }
