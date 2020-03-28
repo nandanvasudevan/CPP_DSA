@@ -8,7 +8,8 @@
             "args": [
                 "*.cpp",
                 "-o",
-                "${fileBasenameNoExtension}.exe"
+                "${fileBasenameNoExtension}.out",
+                "-lboost_serialization"
             ],
             "options": {
                 "cwd": "${fileDirname}"
@@ -30,7 +31,7 @@
         {
             "type": "shell",
             "label": "ExecuteDIR",
-            "command": "${fileBasenameNoExtension}.exe",
+            "command": "${fileBasenameNoExtension}.out",
             "dependsOn": "Compile",
             "group": "build",
             "options": {
@@ -58,7 +59,7 @@
         {
             "type": "shell",
             "label": "ExecuteThis",
-            "command": "${fileBasenameNoExtension}.exe",
+            "command": "${fileBasenameNoExtension}.out",
             "dependsOn": "CompileThis",
             "group": "build",
             "options": {

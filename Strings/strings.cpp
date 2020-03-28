@@ -1,12 +1,21 @@
 #include <iostream>
 #include "strings.h"
 
+/* String::~String()
+{
+    delete string;
+}
+ */
+String::String()
+{
+
+}
+
 String::String(int size)
 {   
     String::size = size;
     length = size;
     String::string = new char[size];
-    // string[length - 1] = '\0';
 }
 
 void String::input()
@@ -14,12 +23,12 @@ void String::input()
     std::cin >> string;    
     int i = 0;
     while(string[i] != '\0'){ i++; }
-    length = i;
+    length = i;    
 }
 
 void String::display(char* message)
-{
-    std::cout << std::endl << message << string;
+{   
+    std::cout << std::endl << message << length;
 }
 
 void String::reverse()
@@ -99,3 +108,19 @@ void String::toLower(char type)
 
 char* String::getString() { return string; }
 int String::getLength() { return length; }
+
+void String::saveData(std::string fileName)
+{    
+    std::ofstream outputFileStream(fileName);
+    boost::archive::text_oarchive ar(outputFileStream);
+
+    ar & *this;    
+}
+
+void String::loadData(std::string fileName)
+{
+    std::ifstream inputFileStream(fileName);
+    boost::archive::text_iarchive ar(inputFileStream);
+
+    ar & *this;  
+}

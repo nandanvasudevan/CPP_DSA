@@ -1,5 +1,6 @@
 #include <iostream>
 #include "strings.h"
+std::string fileName = "Serialized_String.txt";
 
 int main()
 {
@@ -13,5 +14,9 @@ int main()
     name.display("\nUpper: ");
     name.toLower('a');
     name.display("\nLower: ");
+    name.saveData(fileName);    
+    String newName = String();
+    newName.loadData(fileName);
+    newName.display("\nNew Name: ");
     return 0;
 }
