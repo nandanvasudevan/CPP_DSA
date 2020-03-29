@@ -5,7 +5,7 @@ std::string fileName = "Serialized_String.txt";
 int main()
 {
     std::cout << std::endl << "Enter string:\t";
-    String name = String(10);
+    String name = String(20);
     name.input();
     //name.reverse();
     name.display("Input: ");
@@ -13,10 +13,7 @@ int main()
     name.toUpper('a');
     name.display("\nUpper: ");
     name.toLower('a');
-    name.display("\nLower: ");
-    name.saveData(fileName);    
-    String newName = String();
-    newName.loadData(fileName);
-    newName.display("\nNew Name: ");
+    name.display("\nLower: ");    
+    name.saveData(fileName);
     return 0;
 }

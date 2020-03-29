@@ -15,12 +15,21 @@
             {
                 archive & size;
                 archive & length;  
+                archive & wordStat.wordCount;
                 /* archive & test;  */             
             }
             int size;
             int length;            
             char* string;
             /* std::string test; */
+
+            struct wordStats
+            {
+                int wordCount = 0;
+                int vowelCount = 0;
+                int alphabetCount = 0;
+                int characterCount = 0;                
+            }wordStat;
         public:
             String();
             /* ~String(); */
@@ -36,6 +45,13 @@
 
             char* getString();
             int getLength();
+
+            void updateWordStat(void);
+            unsigned int getWordCount(void);
+            unsigned int getVowelCount(void);
+            unsigned int getAlphabetCount(void);
+            unsigned int getCharacterCount(void);
+            unsigned int getConsonantCount(void);
 
             void saveData(std::string);
             void loadData(std::string);

@@ -20,15 +20,16 @@ String::String(int size)
 
 void String::input()
 {
-    std::cin >> string;    
-    int i = 0;
+    std::cin.getline(string, length);
+    int i = 1;
     while(string[i] != '\0'){ i++; }
     length = i;    
+    updateWordStat();
 }
 
 void String::display(char* message)
 {   
-    std::cout << std::endl << message << length;
+    std::cout << std::endl << message << string;
 }
 
 void String::reverse()
@@ -105,9 +106,43 @@ void String::toLower(char type)
     }
 }
 
+void String::updateWordStat()
+{
+    String input = *this;
+    input.toLower();
+    for(int i = 0; i < length; i++)
+    {
+        if( input.string[i] == 'a' || 
+            input.string[i] == 'e' || 
+            input.string[i] == 'i' || 
+            input.string[i] == 'o' || 
+            input.string[i] == 'u')
+        {
+            wordStat.vowelCount++;
+        }
+
+        if((string[i] != ' ' && string[i+1] == ' ') && i > 0)
+        {
+            wordStat.wordCount++;
+        } 
+
+        if((input.string[i] >= (int)'a') && (input.string[i] <= (int)'z'))
+        {
+            wordStat.alphabetCount ++;
+        }
+    }
+    if(string[length-1] != ' ') wordStat.wordCount++;
+    wordStat.characterCount = length-1;
+}
 
 char* String::getString() { return string; }
 int String::getLength() { return length; }
+
+unsigned int String::getAlphabetCount() { return wordStat.alphabetCount; }
+unsigned int String ::getCharacterCount() { return wordStat.characterCount; }
+unsigned int String::getConsonantCount() { return (wordStat.alphabetCount - wordStat.vowelCount); }
+unsigned int String::getVowelCount() { return wordStat.vowelCount; }
+unsigned int String::getWordCount() { return wordStat.wordCount; }
 
 void String::saveData(std::string fileName)
 {    
