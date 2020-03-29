@@ -92,7 +92,9 @@
         "__tree": "cpp",
         "__tuple": "cpp",
         "bit": "cpp",
-        "string_view": "cpp"
+        "string_view": "cpp",
+        "*.rh": "cpp",
+        "version": "cpp"
     },
     "cSpell.words": [
         "ixmxn",

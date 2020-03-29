@@ -1,34 +1,31 @@
-#include <iostream>
 #include "strings.h"
 
-/* String::~String()
-{
-    delete string;
-}
- */
 String::String()
 {
-
+    length = DEFAULT_LENGTH;
+    string = new char[length];
 }
 
 String::String(int size)
 {   
     String::size = size;
     length = size;
-    String::string = new char[size];
+    string = new char[size];
 }
 
 void String::input()
 {
     std::cin.getline(string, length);
+    std::cout << std::endl << "";
     int i = 1;
     while(string[i] != '\0'){ i++; }
-    length = i;    
+    length = i;
     updateWordStat();
 }
 
 void String::display(char* message)
 {   
+    std::cout.flush();
     std::cout << std::endl << message << string;
 }
 
@@ -51,6 +48,9 @@ void String::createCopy(String copy)
     {
         copy.string[i] = string[i];     
     }    
+    copy.wordStat = wordStat;
+    copy.length = length;
+    copy.size = size;
 }
 
 bool String::isPalindrome()
@@ -108,7 +108,8 @@ void String::toLower(char type)
 
 void String::updateWordStat()
 {
-    String input = *this;
+    String input;
+    createCopy(input);
     input.toLower();
     for(int i = 0; i < length; i++)
     {
@@ -135,27 +136,62 @@ void String::updateWordStat()
     wordStat.characterCount = length-1;
 }
 
+bool String::compareString(String toCompare, char type)
+{
+    String lowerThis = String(length);
+    String lowerCompare = String(toCompare.length);
+    toCompare.createCopy(lowerCompare);
+    createCopy(lowerThis);
+    
+    if(type == 'i')
+    {
+        lowerCompare.toLower();
+        lowerThis.toLower();
+
+        for(int i = 0; i < length; i++)
+        {
+            if(lowerThis.string[i] != lowerCompare.string[i]) return false;
+        }
+    }
+    else
+    {
+        for(int i = 0; i < length; i++)
+        {
+            if(lowerThis.string[i] != lowerCompare.string[i]) return false;
+        }
+    }
+
+    return true;    
+}
+
 char* String::getString() { return string; }
 int String::getLength() { return length; }
 
 unsigned int String::getAlphabetCount() { return wordStat.alphabetCount; }
-unsigned int String ::getCharacterCount() { return wordStat.characterCount; }
+unsigned int String::getCharacterCount() { return wordStat.characterCount; }
 unsigned int String::getConsonantCount() { return (wordStat.alphabetCount - wordStat.vowelCount); }
 unsigned int String::getVowelCount() { return wordStat.vowelCount; }
 unsigned int String::getWordCount() { return wordStat.wordCount; }
 
 void String::saveData(std::string fileName)
 {    
+    String copy = String(length);
+    createCopy(copy);    
+    copy.archivedString = string;
     std::ofstream outputFileStream(fileName);
-    boost::archive::text_oarchive ar(outputFileStream);
-
-    ar & *this;    
+    boost::archive::text_oarchive ar(outputFileStream);    
+    ar & copy;    
 }
 
 void String::loadData(std::string fileName)
 {
     std::ifstream inputFileStream(fileName);
     boost::archive::text_iarchive ar(inputFileStream);
+    ar & *this;
 
-    ar & *this;  
+    string = new char[length];
+    for(int i = 0; i < length; i++)
+    {
+        string[i] = archivedString[i];
+    }    
 }

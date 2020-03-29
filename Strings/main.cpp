@@ -10,10 +10,10 @@ int main()
     //name.reverse();
     name.display("Input: ");
     // std::cout << std::endl << std::boolalpha << name.isPalindrome();
-    name.toUpper('a');
+    name.toUpper();
     name.display("\nUpper: ");
-    name.toLower('a');
+    name.toLower();
     name.display("\nLower: ");    
-    name.saveData(fileName);
+    name.saveData(fileName);    
     return 0;
 }

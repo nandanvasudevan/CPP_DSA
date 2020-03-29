@@ -1,11 +1,12 @@
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/serialization/serialization.hpp>
+#include <iostream>
 #include <fstream>
 
 #ifndef STRINGS_H
     #define STRINGS_H
-
+    #define DEFAULT_LENGTH 20
     class String
     {
         private:
@@ -16,12 +17,12 @@
                 archive & size;
                 archive & length;  
                 archive & wordStat.wordCount;
-                /* archive & test;  */             
+                archive & archivedString;
             }
             int size;
             int length;            
             char* string;
-            /* std::string test; */
+            std::string archivedString;
 
             struct wordStats
             {
@@ -29,10 +30,9 @@
                 int vowelCount = 0;
                 int alphabetCount = 0;
                 int characterCount = 0;                
-            }wordStat;
+            } wordStat;
         public:
-            String();
-            /* ~String(); */
+            String();            
             String(int);            
             void reverse();            
             void input();
@@ -40,6 +40,7 @@
             void createCopy(String);
             void toUpper(char type = 'a');
             void toLower(char type = 'a');
+            bool compareString(String, char type = 'n');
             
             bool isPalindrome();
 
