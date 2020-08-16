@@ -4,3 +4,6 @@
 Data structures and algorithms in C++
 
 # [Notes](./Notes.md)
+## [Arrays](./Arrays/ADT/Arrays.md)
+## [Recursion](./Recursion/Recursion.md)
+## [Strings](./Strings/Strings.md)
