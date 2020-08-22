@@ -1,170 +1,178 @@
-#include "strings.h"
+#include "strings.hpp"
 
-String::String()
+String::String() : length(DEFAULT_LENGTH)
 {
-    length = DEFAULT_LENGTH;
     string = new char[length];
 }
 
-String::String(int size)
-{   
-    String::size = size;
-    length = size;
-    string = new char[size];
+String::String(int length) : length(length)
+{
+    string = new char[length];
 }
 
-void String::input()
+String::String(String &original)
+{
+    length = original.length;
+    string = new char[length];
+
+    for (size_t i = 0; i < original.length; i++)
+    {
+        string[i] = original.string[i];
+    }
+}
+
+String::~String()
+{
+    length = 0;
+    delete string;
+}
+
+void String::getInput()
 {
     std::cin.getline(string, length);
-    std::cout << std::endl << "";
+    std::cout << std::endl
+              << "";
     int i = 1;
-    while(string[i] != '\0'){ i++; }
+    while (string[i] != '\0')
+    {
+        i++;
+    }
     length = i;
     updateWordStat();
 }
 
-void String::display(char* message)
-{   
+void String::display(const char *message)
+{
     std::cout.flush();
-    std::cout << std::endl << message << string;
+    std::cout << std::endl
+              << message << string;
 }
 
 void String::reverse()
 {
     int i = 0, j = length - 1;
-    while(i < j)
+    while (i < j)
     {
         char temp = string[i];
         string[i] = string[j];
         string[j] = temp;
-        i ++;
-        j --;
-    }    
-}
-
-void String::createCopy(String copy)
-{
-    for(int i = 0; i < length; i++)
-    {
-        copy.string[i] = string[i];     
-    }    
-    copy.wordStat = wordStat;
-    copy.length = length;
-    copy.size = size;
+        i++;
+        j--;
+    }
 }
 
 bool String::isPalindrome()
 {
-    String reverse = String(length);
-    createCopy(reverse);
+    String reverse(*this);
     reverse.reverse();
 
-    for(int i = 0; i < length; i++)
+    for (size_t i = 0; i < length; i++)
     {
-        if(string[i] != reverse.string[i]) return false;
+        if (string[i] != reverse.string[i])
+            return false;
     }
     return true;
 }
 
-void String::toUpper(char type)
+void String::toUpper(const char type)
 {
-    switch(type)
+    switch (type)
     {
-        case 'a':
-            for(int i = 0; i < length; i++)
-            {
-                if((string[i] >= (int)'a') && (string[i] <= (int)'z'))
-                    string[i] -= 32;    
-            }
+    case 'a':
+        for (size_t i = 0; i < length; i++)
+        {
+            if ((string[i] >= (int)'a') && (string[i] <= (int)'z'))
+                string[i] -= 32;
+        }
         break;
-        case 'f':
-            if((string[0] >= (int)'a') && (string[0] <= (int)'z'))
-                string[0] -= (char) 32;
+    case 'f':
+        if ((string[0] >= (int)'a') && (string[0] <= (int)'z'))
+            string[0] -= (char)32;
         break;
-        default:
+    default:
         break;
     }
 }
 
-void String::toLower(char type)
+void String::toLower(const char type)
 {
-    switch(type)
+    switch (type)
     {
-        case 'a':
-            for(int i = 0; i < length; i++)
-            {
-                if((string[i] >= (int)'A') && (string[i] <= (int)'Z'))
-                    string[i] += 32;
-            }
+    case 'a':
+        for (size_t i = 0; i < length; i++)
+        {
+            if ((string[i] >= (int)'A') && (string[i] <= (int)'Z'))
+                string[i] += 32;
+        }
         break;
-        case 'f':
-            if((string[0] >= (int)'A') && (string[0] <= (int)'Z'))
-                string[0] += (char) 32;
+    case 'f':
+        if ((string[0] >= (int)'A') && (string[0] <= (int)'Z'))
+            string[0] += (char)32;
         break;
-        default:
+    default:
         break;
     }
 }
 
 void String::updateWordStat()
 {
-    String input;
-    createCopy(input);
+    String input(*this);
     input.toLower();
-    for(int i = 0; i < length; i++)
+    for (size_t i = 0; i < length; i++)
     {
-        if( input.string[i] == 'a' || 
-            input.string[i] == 'e' || 
-            input.string[i] == 'i' || 
-            input.string[i] == 'o' || 
+        if (input.string[i] == 'a' ||
+            input.string[i] == 'e' ||
+            input.string[i] == 'i' ||
+            input.string[i] == 'o' ||
             input.string[i] == 'u')
         {
             wordStat.vowelCount++;
         }
 
-        if((string[i] != ' ' && string[i+1] == ' ') && i > 0)
+        if ((string[i] != ' ' && string[i + 1] == ' ') && i > 0)
         {
             wordStat.wordCount++;
-        } 
+        }
 
-        if((input.string[i] >= (int)'a') && (input.string[i] <= (int)'z'))
+        if ((input.string[i] >= (int)'a') && (input.string[i] <= (int)'z'))
         {
-            wordStat.alphabetCount ++;
+            wordStat.alphabetCount++;
         }
     }
-    if(string[length-1] != ' ') wordStat.wordCount++;
-    wordStat.characterCount = length-1;
+    if (string[length - 1] != ' ')
+        wordStat.wordCount++;
+    wordStat.characterCount = length - 1;
 }
 
-bool String::compareString(String toCompare, char type)
+bool String::compareString(String toCompare, const char type)
 {
-    String lowerThis = String(length);
-    String lowerCompare = String(toCompare.length);
-    toCompare.createCopy(lowerCompare);
-    createCopy(lowerThis);
-    
-    if(type == 'i')
+    String lowerThis(*this);
+    String lowerCompare(toCompare);
+
+    if (type == 'i')
     {
         lowerCompare.toLower();
         lowerThis.toLower();
 
-        for(int i = 0; i < length; i++)
+        for (size_t i = 0; i < length; i++)
         {
-            if(lowerThis.string[i] != lowerCompare.string[i]) return false;
+            if (lowerThis.string[i] != lowerCompare.string[i])
+                return false;
         }
     }
     else
     {
-        for(int i = 0; i < length; i++)
+        for (size_t i = 0; i < length; i++)
         {
-            if(lowerThis.string[i] != lowerCompare.string[i]) return false;
+            if (lowerThis.string[i] != lowerCompare.string[i])
+                return false;
         }
     }
 
-    return true;    
+    return true;
 }
 
-char* String::getString() { return string; }
+char *String::getString() { return string; }
 int String::getLength() { return length; }
 
 unsigned int String::getAlphabetCount() { return wordStat.alphabetCount; }
@@ -173,25 +181,24 @@ unsigned int String::getConsonantCount() { return (wordStat.alphabetCount - word
 unsigned int String::getVowelCount() { return wordStat.vowelCount; }
 unsigned int String::getWordCount() { return wordStat.wordCount; }
 
-void String::saveData(std::string fileName)
-{    
-    String copy = String(length);
-    createCopy(copy);    
+void String::saveData(const char *fileName)
+{
+    String copy(*this);
     copy.archivedString = string;
     std::ofstream outputFileStream(fileName);
-    boost::archive::text_oarchive ar(outputFileStream);    
-    ar & copy;    
+    boost::archive::text_oarchive ar(outputFileStream);
+    ar &copy;
 }
 
-void String::loadData(std::string fileName)
+void String::loadData(const char *fileName)
 {
     std::ifstream inputFileStream(fileName);
     boost::archive::text_iarchive ar(inputFileStream);
-    ar & *this;
+    ar &*this;
 
     string = new char[length];
-    for(int i = 0; i < length; i++)
+    for (size_t i = 0; i < length; i++)
     {
         string[i] = archivedString[i];
-    }    
+    }
 }

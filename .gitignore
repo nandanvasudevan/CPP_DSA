@@ -3,4 +3,6 @@
 *.pdb
 *.out
 *.stackdump
+*.gch
 *Serialized*.*
+build/

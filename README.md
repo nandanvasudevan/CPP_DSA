@@ -1,5 +1,5 @@
 ![License](https://img.shields.io/github/license/nandanvasudevan/CPP-DSA)
-![Size](https://img.shields.io/github/size/nandanvasudevan/CPP-DSA?style=plastic)
+![Size](https://img.shields.io/github/languages/code-size/nandanvasudevan/CPP-DSA)
 # CPP-DSA
 Data structures and algorithms in C++
 
