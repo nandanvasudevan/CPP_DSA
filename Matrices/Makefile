@@ -5,12 +5,12 @@ EXEC := DiagonalMatrix
 SRC := ./
 LIBS :=
 
+DEFAULT:
+	$(MAKE) -C ./ EXEC
+	
 STATIC_ANALYSIS:
 	$(MAKE) -C ./ clean 
 	scan-build-10 $(MAKE) -C ./ DEFAULT
-
-DEFAULT:
-	$(MAKE) -C ./ EXEC
 
 EXEC: $(BUILD)$(EXEC).out
 

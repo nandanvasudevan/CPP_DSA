@@ -10,10 +10,8 @@
 #include "Matrix.hpp"
 namespace diagMat
 {
-    int *getDiagonalElements(const int **diagonalMatrix, size_t matrixSize)
+    int *getDiagonalElements(const int **diagonalMatrix, int *diagonalElements, size_t matrixSize)
     {
-        int *diagonalElements = new int(matrixSize);
-
         if (diagonalMatrix != nullptr)
         {
             for (size_t i = 0; i < matrixSize; i++)
@@ -23,5 +21,21 @@ namespace diagMat
         }
 
         return diagonalElements;
+    }
+
+    bool isDiagonal(const int **diagonalMatrix, size_t matrixSize)
+    {
+        for (size_t i = 0; i < matrixSize; i++)
+        {
+            for (size_t j = 0; j < matrixSize; j++)
+            {
+                if ((i != j) && (diagonalMatrix[i][j] != 0))
+                {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 } // namespace diagMat

@@ -17,6 +17,7 @@ namespace diagMat
      * @param matrixSize Size of diagonal matrix. Should be a square.
      * @return int* The array containing the diagonal elements.
      */
-    int *getDiagonalElements(const int **diagonalMatrix, size_t matrixSize);
+    int *getDiagonalElements(const int **diagonalMatrix, int *diagonalElements, size_t matrixSize);
+    bool isDiagonal(const int **diagonalMatrix, size_t matrixSize);
 } // namespace diagMat
 #endif

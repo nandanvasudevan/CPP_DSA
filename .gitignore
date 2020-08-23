@@ -6,3 +6,4 @@
 *.gch
 *Serialized*.*
 build/
+*.data
