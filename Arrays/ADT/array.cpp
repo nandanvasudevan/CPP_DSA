@@ -1,5 +1,5 @@
 #include <iostream>
-#include "array.h"
+#include "array.hpp"
 
 Array::Array(const int length)
 {
@@ -23,7 +23,7 @@ Array::Array(int length, bool bFIFO_LIFO, bool bOverwrite)
 
 int Array::getValue(const int pos) { return A[pos]; }
 
-void Array::display(char separator, std::string& Message)
+void Array::display(char separator, std::string Message)
 {
     std::cout << Message << std::endl;
     for(int i = 0; i < length; i++)

@@ -32,7 +32,7 @@ class Array
         // Member functions
         int getValue(const int pos);
         // Insert an element into the array     
-        void display(char, std::string& Message = std::string(""));
+        void display(char, std::string Message = std::string(""));
         // Insert into a position. Overwrites if enabled.
         void insert(const int pos, const int value);
         // Insert into FIFO or LIFO

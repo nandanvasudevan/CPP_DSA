@@ -1,5 +1,5 @@
 #include <iostream>
-#include "array.h"
+#include "array.hpp"
 
 void findMissingNumber(Array input)
 {
@@ -31,13 +31,13 @@ void multipleMissingNumbers(Array input)
                 j += difference;
                 missingNumbers++;
             }
-            difference - input.getValue(i) - i;
+            difference = input.getValue(i) - i;
         }        
     }
     std::cout << std::endl << "\nMissing numbers: " << missingNumbers;
 }
 
-void main()
+int main()
 {
     int length;
     std::cout << std::endl << "Enter length: " ;
@@ -50,8 +50,10 @@ void main()
         input->insert(i + offset);
     }
 
-    input->insert(length-2,7);
-    input->insert(length-1,9);
+//    input->insert(length-2,7);
+//    input->insert(length-1,9);
     input->display('\t',std::string("\nInput: "));
     multipleMissingNumbers(*input);
+
+    return 0;
 }
