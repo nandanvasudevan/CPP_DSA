@@ -8,3 +8,6 @@
 build/
 *.data
 /Default/
+include/
+lib/
+share/

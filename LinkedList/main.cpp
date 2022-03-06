@@ -12,6 +12,7 @@
 #include <fmt/core.h>
 #include <fmt/color.h>
 #include <fmt/format.h>
+#include <fmt/printf.h>
 
 #include "simple.hpp"
 //* Private Constants **********************************************************************
@@ -22,16 +23,15 @@
 
 SNode *pFirst = new SNode(35);
 
-int main()
-{
+int main() {
     int16_t iArray[] =
-        {
-            1,
-            2,
-            -345,
-            500,
-            67
-        };
+            {
+                    1,
+                    2,
+                    -345,
+                    500,
+                    67
+            };
 
     SNode *pTail = new SNode(iArray,
                              (sizeof(iArray)
@@ -41,12 +41,12 @@ int main()
 
     pFirst->display();
 
-    fmt::print(fmt::format("Count: {}\n",
-                           pFirst->getCount()));
-    fmt::print(fmt::format("Max: {}\n",
-                           pFirst->getMax()));
-    fmt::print(fmt::format("Min: {}\n",
-                           pFirst->getMin()));
+    fmt::print("Count: {}\n",
+               pFirst->getCount());
+    fmt::print("Max: {}\n",
+               pFirst->getMax());
+    fmt::print("Min: {}\n",
+               pFirst->getMin());
 
     delete pTail;
     return 0;

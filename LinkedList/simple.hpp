@@ -10,9 +10,7 @@
 #define LINKEDLIST_SIMPLE_HPP_
 //* Public Include *************************************************************************
 #include <cstdint>
-#include <fmt/core.h>
-#include <fmt/color.h>
-#include <fmt/format.h>
+#include <functional>
 #include <string_view>
 //* Public Constants ***********************************************************************
 
@@ -62,7 +60,7 @@ struct SNode
      * Display all the elements from this node
      * @param svFmt Formatting for output
      */
-    void display(const std::string svFmt = "Data: {}\n");
+    void display();
 
     /**
      * Do a certain task with all the elements
